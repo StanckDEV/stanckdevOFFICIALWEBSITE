@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="page-container">
+    
+    <header class="hero reveal">
+        <div class="hero-content">
+            <h1 class="gradient-text">Codice.Logica. <br>stanckDEV</h1>
+            <p class="lead-text">Trasformo idee complesse in interfacce fluide e leggere.Esperto in soluzioni back-end ottimizzate per la massima velocità.La UX per me è sempre al primo posto.</p>
+            <div class="hero-actions">
+                <div class="status-indicator">
+                    <span class="pulse-dot"></span>
+                    <span>STATUS: ONLINE</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="lab">
+    <span class="section-label reveal">I MIEI PROGETTI:</span>
+    <div class="bento-grid">
+        {% for p in projects %}
+            {% if p.link != "#" %}
+                <a href="{{ p.link }}" target="_blank" class="bento-card reveal clickable" style="transition-delay: {{ loop.index0 * 0.1 }}s;">
+                    <div class="card-content">
+                        <span class="badge {{ p.status_class }}">{{ p.status }}</span>
+                        <h3>{{ p.title }}</h3>
+                        <p>{{ p.desc }}</p>
+                    </div>
+                </a>
+            {% else %}
+                <div class="bento-card reveal locked" style="transition-delay: {{ loop.index0 * 0.1 }}s;">
+                    <div class="card-content">
+                        <span class="badge {{ p.status_class }}">{{ p.status }}</span>
+                        <h3>{{ p.title }}</h3>
+                        <p>{{ p.desc }}</p>
+                    </div>
+                    <div class="card-footer">SVILUPPO IN CORSO...</div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </section>
+
+    <section id="stack">
+        <span class="section-label reveal">            </span>
+        <h2 class="reveal">Tecnologie & Workflow.</h2>
+        <div class="stack-grid">
+            <div class="stack-item reveal">
+                <div class="stack-info"><span>Python,HTML,CSS</span> <span>90%</span></div>
+                <div class="progress-bar"><div style="width: 90%;"></div></div>
+            </div>
+            <div class="stack-item reveal" style="transition-delay: 0.1s;">
+                <div class="stack-info"><span>JavaScript</span> <span>35%</span></div>
+                <div class="progress-bar"><div style="width: 35%;"></div></div>
+            </div>
+            <div class="stack-item reveal" style="transition-delay: 0.2s;">
+                <div class="stack-info"><span>C++,React</span> <span>Sto approfondendo</span></div>
+                <div class="progress-bar"><div style="width: 10%;"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="manifesto" class="reveal">
+        <div class="manifesto-box">
+            <p>Il web moderno è troppo pesante. Credo in architetture snelle, dove l'estetica di fascia alta incontra performance imbattibili. Nessun builder, nessun codice superfluo. Solo ingegneria.</p>
+        </div>
+    </section>
+
+    <footer class="reveal">
+        © 2026 stanckDEV. Made with 🤍<br>
+        <a href="mailto:stanckdev.lab@gmail.com">stanckdev.lab@gmail.com</a><br>
+        <a href="https://github.com/StanckDEV">github</a>
+    </footer>
+
+</div>
+{% endblock %}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stanckDEV | OFFICIAL WEBSITE</title>
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav class="sidebar">
+            <div class="logo-container">
+        <a href="/">
+            <img src="{{ url_for('static', filename='favicon.png') }}" alt="stanckDEV Logo" class="main-logo">
+        </a>
+    </div>
+        
+        
+        <ul class="nav-links">
+            <li><a href="/" class="nav-item active"><span></span>00. Home</a></li>
+            <li><a href="/visione" class="nav-item"><span></span>01. Metodo</a></li>
+            <li><a href="/business" class="nav-item"><span></span>02. Business</a></li>
+            <li><a href="/blog" class="nav-item"><span></span>03. Lab Notes</a></li>
+        </ul>
+    </nav>
+
+    <main id="app-view">
+        <div id="content-injector">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <script>
+        // --- 1. LOGICA ANIMAZIONI (REVEAL) ---
+        function initReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(reveal => observer.observe(reveal));
+            
+            // Forza l'apparizione degli elementi visibili all'avvio
+            setTimeout(() => {
+                document.querySelectorAll('.reveal').forEach(el => {
+                    if(el.getBoundingClientRect().top < window.innerHeight) {
+                        el.classList.add('active');
+                    }
+                });
+            }, 50);
+        }
+
+        // Inizializza al primo caricamento
+        document.addEventListener("DOMContentLoaded", initReveal);
+
+        // --- 2. LOGICA SPA (NAVIGAZIONE FLUIDA) ---
+        document.querySelectorAll('.nav-item').forEach(link => {
+            link.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const url = e.currentTarget.href;
+                
+                // Aggiorna Sidebar UI
+                document.querySelectorAll('.nav-item').forEach(l => l.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+
+                // Carica nuovo contenuto
+                const response = await fetch(url);
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newContent = doc.querySelector('#content-injector').innerHTML;
+                
+                const injector = document.querySelector('#content-injector');
+                injector.style.opacity = '0';
+                
+                setTimeout(() => {
+                    injector.innerHTML = newContent;
+                    injector.style.opacity = '1';
+                    window.history.pushState({}, '', url);
+                    window.scrollTo(0, 0);
+                    initReveal(); // RIATTIVA LE ANIMAZIONI SULLA NUOVA PAGINA
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
