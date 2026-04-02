@@ -13,7 +13,7 @@ PROJECTS = [
         "link": "https://stanckdev-consigliare-editor.netlify.app"
     },
     {
-        "title": "stanckDEV|OFF.WEBSITE",
+        "title": "stanckDEV|OFF.WEB.",
         "status": "Stable",
         "status_class": "badge-stable",
         "desc": "L'architettura che stai navigando. SPA custom focalizzata su UX fluida e design Bento.",
