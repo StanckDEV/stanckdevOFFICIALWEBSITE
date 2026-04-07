@@ -5,11 +5,11 @@ Benvenuti nel repository del mio sito web personale! Questo progetto è un blog 
 ## 🛠️ Tecnologie Utilizzate
 * **Backend:** Python / Flask
 * **Frontend:** HTML5, CSS3 (Custom Design)
-* **Deployment:** Render
+* **Deployment:** Vercel
 * **WSGI Server:** Gunicorn
 
 ## 📂 Struttura del Progetto
-* `app.py`: Il cuore dell'applicazione Flask.
+* `api/index.py`: Il cuore dell'applicazione Flask.
 * `templates/`: Contiene i file HTML del sito.
 * `static/`: Contiene i file CSS, JavaScript e le immagini.
 * `requirements.txt`: Elenco delle librerie Python necessarie.
