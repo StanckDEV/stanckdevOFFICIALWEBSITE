@@ -40,7 +40,3 @@ def google_verification():
     return "google-site-verification: google495aa6fdf106bb3c.html" 
 
 app = app
-# Cancella queste righe:
-# if __name__ == '__main__':
-#     port = int(os.environ.get("PORT", 5000))
-#     app.run(host='0.0.0.0', port=port)
